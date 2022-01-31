@@ -13,4 +13,6 @@
         android:title="show_selections"
         android:icon="@android:drawable/ic_menu_info_details"
         app:showAsAction="always" />
+
+
 </menu>
