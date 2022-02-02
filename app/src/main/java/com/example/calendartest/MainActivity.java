@@ -63,10 +63,43 @@ RadioGroup.OnCheckedChangeListener {
                 {
                     Calendar calendar = days.get(i);
                     final int day = calendar.get(Calendar.DAY_OF_MONTH);
+                    final int month = calendar.get(Calendar.MONTH);
+                    final int year = calendar.get(Calendar.YEAR);
+                    String week = new SimpleDateFormat("EE").format(calendar.getTime());
+                    String day_full = year + "년" + (month+1) + "월 " + day + "일 " + week + "요일";
+                    result += (day_full +"\n");
                 }
+                Toast.makeText(MainActivity.this, result, Toast.LENGTH_LONG).show();
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
         }
     }
 
     private void clearSelectionsMenuClick() {
+        calendarView.clearSelections();
+    }
+
+    public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
+        clearSelectionsMenuClick();
+        switch (checkedId) {
+
+            case R.id.rb_single:
+                calendarView.setSelectionType(SelectionType.SINGLE);
+                break;
+
+            case R.id.rb_multiple:
+                calendarView.setSelectionType(SelectionType.MULTIPLE);
+                break;
+
+            case R.id.rb_range:
+                calendarView.setSelectionType(SelectionType.RANGE);
+                break;
+
+//            case R.id.rb_none:
+//                calendarView.setSelectionType(SelectionType.NONE);
+//                break;
+        }
     }
 }
